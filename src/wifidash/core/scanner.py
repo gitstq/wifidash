@@ -285,17 +285,27 @@ class WiFiScanner:
         else:
             return max(0, signal_dbm + 100)
     
-    def scan(self) -> List[WiFiNetwork]:
+    def scan(self, use_demo: bool = False) -> List[WiFiNetwork]:
         """
         执行WiFi扫描 / Perform WiFi scan
+        
+        Args:
+            use_demo: 强制使用演示数据 / Force using demo data
         
         Returns:
             List[WiFiNetwork]: 扫描结果 / Scan results
         """
-        if self.system == "Linux":
+        if use_demo:
+            networks = self._generate_demo_networks()
+        elif self.system == "Linux":
             networks = self.scan_linux()
+            # 如果扫描失败或没有结果，使用演示数据 / If scan fails or no results, use demo data
+            if not networks:
+                networks = self._generate_demo_networks()
         elif self.system == "Darwin":  # macOS
             networks = self.scan_macos()
+            if not networks:
+                networks = self._generate_demo_networks()
         else:
             # Windows或其他系统使用模拟数据 / Windows or other use simulated data
             networks = self._generate_demo_networks()
