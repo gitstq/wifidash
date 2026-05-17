@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wifidash"
+version = "1.0.0"
+description = "WiFiDash - 智能WiFi网络诊断与可视化工具 / Smart WiFi Network Diagnostics & Visualization Tool"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "WiFiDash Team", email = "wifidash@example.com"}
+]
+keywords = ["wifi", "network", "diagnostics", "scanner", "tui", "cli"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Networking",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "textual>=0.41.0",
+    "rich>=13.0.0",
+    "click>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+wifidash = "wifidash.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/gitstq/wifidash"
+Repository = "https://github.com/gitstq/wifidash"
+Issues = "https://github.com/gitstq/wifidash/issues"
+Documentation = "https://github.com/gitstq/wifidash#readme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+wifidash = ["*.css", "*.json"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"

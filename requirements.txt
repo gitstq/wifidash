@@ -1,0 +1,10 @@
+# WiFiDash 依赖 / WiFiDash Dependencies
+# 安装: pip install -r requirements.txt
+
+# 核心依赖 / Core Dependencies
+textual>=0.41.0
+rich>=13.0.0
+click>=8.0.0
+
+# 可选依赖 / Optional Dependencies
+# 开发依赖请安装: pip install -e ".[dev]"
